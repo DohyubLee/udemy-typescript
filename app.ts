@@ -1,19 +1,39 @@
-const person: {
-  name: string;
-  age: number;
-  role: [number, string, string]; // 튜플 타입 배열에 정해진 순서의 타입과 개수를 설정함
-} = {
-  name: "dddd",
-  age: 30,
-  role: [2, "dddd", "cccc"],
-};
+// section5
+// 클래스 & 인터페이스
+class Department {
+  public name: string;
+  private employees: string[] = [];
 
-enum Role {
-  ADMIN = "ddd",
-  READ = "ccc",
-  AUTHOR = 2,
+  constructor(n: string) {
+    this.name = n;
+  }
+
+  describe(this: Department) {
+    console.log("Department: " + this.name);
+  }
+
+  addEmployee(employee: string) {
+    // validation etc
+    this.employees.push(employee);
+  }
+
+  printEmployeeInformation() {
+    console.log(this.employees.length);
+    console.log(this.employees);
+  }
 }
 
-console.log("enum test", Role.ADMIN);
+const accounting = new Department("Accounting");
 
-console.log(person.age);
+accounting.addEmployee("Max");
+accounting.addEmployee("Manu");
+
+// accounting.employees[2] = 'Anna';
+
+accounting.describe();
+accounting.name = "NEW NAME";
+accounting.printEmployeeInformation();
+
+// const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
+
+// accountingCopy.describe();
