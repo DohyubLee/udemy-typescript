@@ -1,39 +1,20 @@
-// section5
-// 클래스 & 인터페이스
-class Department {
-  public name: string;
-  private employees: string[] = [];
+// section8 (데코레이터)
+// js로 변환할때 에러는 나지만 서버실행시 정상동작함
 
-  constructor(n: string) {
-    this.name = n;
-  }
+function Logger(constructor: Function) {
+  console.log("Logging...");
+  console.log(constructor);
+}
 
-  describe(this: Department) {
-    console.log("Department: " + this.name);
-  }
+@Logger // 밑에 클래스 생성자부분이 로그됨
+class Person {
+  name = "Max";
 
-  addEmployee(employee: string) {
-    // validation etc
-    this.employees.push(employee);
-  }
-
-  printEmployeeInformation() {
-    console.log(this.employees.length);
-    console.log(this.employees);
+  constructor() {
+    console.log("Creating person object...");
   }
 }
 
-const accounting = new Department("Accounting");
+const pers = new Person(); // 생성자 실행됨
 
-accounting.addEmployee("Max");
-accounting.addEmployee("Manu");
-
-// accounting.employees[2] = 'Anna';
-
-accounting.describe();
-accounting.name = "NEW NAME";
-accounting.printEmployeeInformation();
-
-// const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
-
-// accountingCopy.describe();
+console.log(pers);
